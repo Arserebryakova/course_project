@@ -1,40 +1,28 @@
 #include "vector_utils.hpp"
 
 void VectorUtils::multiplyVecs(const std::vector<double>& f, const std::vector<double>& g, std::vector<double>& fg,
-                               size_t size)
-{
+                               size_t size) {
     for (size_t i = 0; i < size; ++i)
         fg[i] = f[i] * g[i];
 }
 
-void VectorUtils::copy(std::vector<double>& dst, const std::vector<double>& src, size_t count)
-{
-    for (size_t i = 0; i < count; ++i)
-        dst[i] = src[i];
-}
-
-double VectorUtils::weight(int i, int n, double step)
-{
+double VectorUtils::weight(int i, int n, double step) {
     return i == 0 || i == n - 1 ? step / 2 : step;
 }
 
-double VectorUtils::jacobian(double x, int dim)
-{
-    return
-            dim == 1 ? 1.0 :
-            dim == 2 ? x :
-            x * x;
+double VectorUtils::jacobian(double x, int dim) {
+    return dim == 1 ? 1.0 :
+           dim == 2 ? x :
+           x * x;
 }
 
 double
 VectorUtils::getDot(const std::vector<double>& f, const std::vector<double>& g, size_t size, double step, double origin,
-                    int dim)
-{
+                    int dim) {
     double res = 0.0;
     double x = origin;
 
-    for (size_t i = 0; i < size; ++i)
-    {
+    for (size_t i = 0; i < size; ++i) {
         res += f[i] * g[i] * weight(i, size, step) * jacobian(x, dim);
         x += step;
     }
@@ -43,13 +31,11 @@ VectorUtils::getDot(const std::vector<double>& f, const std::vector<double>& g, 
     return res * dimCoeff;
 }
 
-double VectorUtils::getIntNorm(const std::vector<double>& f, size_t size, double step, double origin, int dim)
-{
+double VectorUtils::getIntNorm(const std::vector<double>& f, size_t size, double step, double origin, int dim) {
     double res = 0.0;
     double x = origin;
 
-    for (size_t i = 0; i < size; ++i)
-    {
+    for (size_t i = 0; i < size; ++i) {
         res += std::abs(f[i]) * weight(i, size, step) * jacobian(x, dim);
         x += step;
     }

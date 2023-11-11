@@ -88,8 +88,6 @@ struct Result
     size_t n_count;
     std::vector<double> C;
 
-    Result() {}
-
     /* Second moment at the origin */
     double getC0() const
     {
