@@ -3,7 +3,6 @@
 #include <math.h>
 #include <vector>
 #include "problem.hpp"
-#include "vector_utils.hpp"
 
 /* get zero padded samples of birth and death kernels and for C */
 struct Samples {
@@ -24,7 +23,7 @@ class EulerSolver {
 public:
     Result solve(const Problem& p);
 private:
-    void precalcSamples(Samples& vecs, const Problem& p);
+    void precalcSamples(Samples& vecs, const Problem& p, const std::vector<double>& weightedJacobians);
     void getConvolutions(Samples& vecs, const Problem& p);
     static std::vector<double> convolve(const std::vector<double>& f, const std::vector<double>& g, const Problem& p);
     /* convolving function */

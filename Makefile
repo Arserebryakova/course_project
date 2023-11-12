@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-Wall -O3 -Ofast
 LIBS=-lm
 
-SRC=solver.cpp problem.cpp vector_utils.cpp
+SRC=solver.cpp problem.cpp
 OBJ=$(SRC:%.cpp=%.o)
 
 %.o: %.cpp %.hpp
